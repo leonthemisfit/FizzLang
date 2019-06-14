@@ -27,6 +27,16 @@ module FizzLang
         res
     end
 
+    def select(&block)
+        res = as_enum(:select)
+
+        if block_given?
+            res = res.select { |str| block.call(str) }
+        end
+
+        res
+    end
+
     private
 
     def as_enum(method)
