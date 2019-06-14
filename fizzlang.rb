@@ -17,6 +17,16 @@ module FizzLang
         end
     end
 
+    def map(&block)
+        res = as_enum(:map)
+
+        if block_given?
+            res = res.map { |str| block.call(str) }
+        end
+
+        res
+    end
+
     private
 
     def as_enum(method)
