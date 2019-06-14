@@ -18,5 +18,16 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('Fizz', @fb[2])
         assert_equal('Buzz', @fb[4])
         assert_equal('FizzBuzz', @fb[14])
+        assert_equal(nil, @fb[15])
+    end
+
+    def test_map
+        up = @fb.map { |res| res.upcase }
+
+        assert_equal('1', up[0])
+        assert_equal('FIZZ', up[2])
+        assert_equal('BUZZ', up[4])
+        assert_equal('FIZZBUZZ', up[14])
+        assert_equal(nil, up[15])
     end
 end
