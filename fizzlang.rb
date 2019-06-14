@@ -31,7 +31,7 @@ module FizzLang
         res = as_enum(:select)
 
         if block_given?
-            res = res.select { |str| block.call(str) }
+            res = res.select(&block)
         end
 
         res
