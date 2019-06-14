@@ -7,6 +7,10 @@ module FizzLang
         @range = range
     end
 
+    def [](ind)
+        as_array[ind]
+    end
+
     def each
         enum = as_enum(:each)
 
