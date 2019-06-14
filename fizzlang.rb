@@ -59,8 +59,12 @@ module FizzLang
 
     private
 
+    def as_array
+        @arr ||= @range.map { |i| self.class.check(i) }
+    end
+
     def as_enum(method)
-        @range.map { |i| self.class.check(i) }.to_enum(method)
+        as_array.to_enum(method)
     end
 end
 
