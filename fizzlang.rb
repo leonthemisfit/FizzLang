@@ -7,6 +7,16 @@ module FizzLang
         @range = range
     end
 
+    def each
+        enum = as_enum(:each)
+
+        if block_given?
+            enum.each { |str| yield str }
+        else
+            enum
+        end
+    end
+
     private
 
     def as_enum(method)
