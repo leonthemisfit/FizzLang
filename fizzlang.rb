@@ -17,6 +17,16 @@ module FizzLang
         end
     end
 
+    def with_val
+        if block_given?
+            @range.each do |n|
+                yield n, self.class.check(n)
+            end
+        else
+            @range.map { |n| [ n, self.class.check(n) ] }.to_enum(:map)
+        end
+    end
+
     def map(&block)
         res = as_enum(:map)
 
