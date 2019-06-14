@@ -37,6 +37,16 @@ module FizzLang
         res
     end
 
+    def reject(&block)
+        res = as_enum(:reject)
+
+        if block_given?
+            res = res.reject(&block)
+        end
+
+        res
+    end
+
     private
 
     def as_enum(method)
