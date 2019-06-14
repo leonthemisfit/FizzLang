@@ -30,4 +30,16 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('FIZZBUZZ', up[14])
         assert_equal(nil, up[15])
     end
+
+    def test_with_val
+        with_map = @fb.with_val.map do |val, res|
+            "#{val}: #{res}"
+        end
+
+        assert_equal('1: 1', with_map[0])
+        assert_equal('3: Fizz', with_map[2])
+        assert_equal('5: Buzz', with_map[4])
+        assert_equal('15: FizzBuzz', with_map[14])
+        assert_equal(nil, with_map[15])
+    end
 end
