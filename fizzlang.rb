@@ -6,6 +6,12 @@ module FizzLang
     def initialize(range)
         @range = range
     end
+
+    private
+
+    def as_enum(method)
+        @range.map { |i| self.class.check(i) }.to_enum(method)
+    end
 end
 
 module Fizzy
