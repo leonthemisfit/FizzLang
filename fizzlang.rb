@@ -176,6 +176,21 @@ module Fizzy
     #           Fizz 3
     #           Buzz 5
     #       end
+    #       
+    #       class BlockBuzz
+    #           include FizzLang
+    #           
+    #           test_cases do |cases|
+    #               cases[:Block] = 3
+    #               cases[:Buzz] = 5
+    #           end
+    #       end
+    #       
+    #       class KeyBuzz
+    #           include FizzLang
+    #           
+    #           test_cases Key: 3, Buzz: 5
+    #       end
     def test_cases(*args, **kwargs, &block)
         @tests ||= nil
         
