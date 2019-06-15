@@ -156,6 +156,7 @@ end
 # The methods here are used to dyanmically generate the appropriated
 # methods on the class being extended.
 module Fizzy
+    # Exposes the internal tests hash so that classes can use it internally
     attr_reader :tests
 
     # Prepare and define the methods and names that will be used to test
