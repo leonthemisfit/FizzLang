@@ -63,7 +63,8 @@ class TestFizzBuzz < Test::Unit::TestCase
 
     # Test the +reject+ method for basic simple rejections on FizzBuzz
     def test_reject
-        assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], @fb.reject { |res| res.include?('Fizz') || res.include?('Buzz') })
+        assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], 
+            @fb.reject { |res| res.include?('Fizz') || res.include?('Buzz') })
     end
 
     # Test the join method on FizzBuzz
@@ -73,6 +74,7 @@ class TestFizzBuzz < Test::Unit::TestCase
 
     # Test the reduce method on FizzBuzz
     def test_reduce
-        assert_equal('12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz', @fb.reduce { |acc, res| acc + res })
+        assert_equal('12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz', 
+            @fb.reduce { |acc, res| acc + res })
     end
 end
