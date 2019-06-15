@@ -172,18 +172,20 @@ module Fizzy
     #       end
     def test_cases(*args)
         @tests ||= nil
-        if @tests.nil?
-            @tests = {}
-            args.each do |sym|
-                define_singleton_method(sym) do |n = 1|
-                    @tests[sym] ||= n
-                end
+        
+        return @tests unless @tests.nil?
+        
+        @tests = {}
+        args.each do |sym|
+            define_singleton_method(sym) do |n = 1|
+                @tests[sym] ||= n
+            end
 
-                define_method(sym) do
-                    self.class.tests[sym]
-                end
+            define_method(sym) do
+                self.class.tests[sym]
             end
         end
+        
         @tests
     end
 
