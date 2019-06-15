@@ -70,4 +70,9 @@ class TestFizzBuzz < Test::Unit::TestCase
     def test_join
         assert_equal('1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz', @fb.join)
     end
+
+    # Test the reduce method on FizzBuzz
+    def test_reduce
+        assert_equal('12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz', @fb.reduce { |acc, res| acc + res })
+    end
 end

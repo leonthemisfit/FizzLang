@@ -126,6 +126,21 @@ module FizzLang
         as_array.join(delim)
     end
 
+    # Reduce the results to a single value using a simply wrapper around
+    # the Ruby reduce method. If a block is given it returns the result
+    # of the reduction, with no block it returns an :reduce enum
+    # * +start+ -- Starting value for the reduce, defaults to empty string
+    #
+    #       fizzy = FizzLang.new(1..10)
+    #       fizzy.reduce { |acc, res| acc + res }
+    def reduce(start = '', &block)
+        if block_given?
+            as_array.reduce(start, &block)
+        else
+            as_enum(:reduce)
+        end
+    end
+
     private
 
     def as_array
