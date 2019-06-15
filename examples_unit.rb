@@ -14,6 +14,8 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('Fizz', FizzBuzz.check(3))
         assert_equal('Buzz', FizzBuzz.check(5))
         assert_equal('FizzBuzz', FizzBuzz.check(15))
+        assert_equal(3, FizzBuzz.Fizz)
+        assert_equal(5, FizzBuzz.Buzz)
     end
 
     # Test the basic instance usage and indexing on FizzBuzz
@@ -27,6 +29,8 @@ class TestFizzBuzz < Test::Unit::TestCase
             ['1', '2', 'Fizz', '4', 'Buzz', 
             'Fizz', '7', '8', 'Fizz', 'Buzz', 
             '11', 'Fizz', '13', '14', 'FizzBuzz'], @fb.results)
+        assert_equal(3, @fb.Fizz)
+        assert_equal(5, @fb.Buzz)
     end
 
     # Test the results of calling +map+ on FizzBuzz

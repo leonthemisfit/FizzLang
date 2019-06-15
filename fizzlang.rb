@@ -156,6 +156,7 @@ end
 # The methods here are used to dyanmically generate the appropriated
 # methods on the class being extended.
 module Fizzy
+    attr_reader :tests
 
     # Prepare and define the methods and names that will be used to test
     # values in a call to check().
@@ -174,8 +175,12 @@ module Fizzy
         if @tests.nil?
             @tests = {}
             args.each do |sym|
-                define_singleton_method(sym) do |n|
+                define_singleton_method(sym) do |n = 1|
                     @tests[sym] ||= n
+                end
+
+                define_method(sym) do
+                    self.class.tests[sym]
                 end
             end
         end
