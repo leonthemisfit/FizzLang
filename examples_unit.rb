@@ -84,6 +84,7 @@ class TestFizzBuzz < Test::Unit::TestCase
     end
 end
 
+# Test Case for the BlockBuzz class
 class TestBlockBuzz < Test::Unit::TestCase
     # Prepare +fb+ instance variable for use in tests
     def setup
@@ -166,6 +167,7 @@ class TestBlockBuzz < Test::Unit::TestCase
     end
 end
 
+# Test Case for the KeyBuzz class
 class TestKeyBuzz < Test::Unit::TestCase
     # Prepare +fb+ instance variable for use in tests
     def setup
