@@ -1,11 +1,14 @@
 require 'test/unit'
 require './examples'
 
+# Test Case for the FizzBuzz class
 class TestFizzBuzz < Test::Unit::TestCase
+    # Prepare +fb+ instance variable for use in tests
     def setup
         @fb = FizzBuzz.new(1..15)
     end
 
+    # Test the class methods on FizzBuzz
     def test_static
         assert_equal('1', FizzBuzz.check(1))
         assert_equal('Fizz', FizzBuzz.check(3))
@@ -13,6 +16,7 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('FizzBuzz', FizzBuzz.check(15))
     end
 
+    # Test the basic instance usage and indexing on FizzBuzz
     def test_instance_basic
         assert_equal('1', @fb[0])
         assert_equal('Fizz', @fb[2])
@@ -21,6 +25,7 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal(nil, @fb[15])
     end
 
+    # Test the results of calling +map+ on FizzBuzz
     def test_map
         up = @fb.map { |res| res.upcase }
 
@@ -31,6 +36,8 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal(nil, up[15])
     end
 
+    # Test the +with_val+ method by calling it and mapping the
+    # result for easier testing on FizzBuzz
     def test_with_val
         with_map = @fb.with_val.map do |val, res|
             "#{val}: #{res}"
@@ -43,12 +50,14 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal(nil, with_map[15])
     end
 
+    # Test the +select+ method for basic simple selections on FizzBuzz
     def test_select
         assert_equal(['Fizz', 'Fizz', 'Fizz', 'Fizz'], @fb.select { |res| res == 'Fizz' })
         assert_equal(['Buzz', 'Buzz'], @fb.select { |res| res == 'Buzz' })
         assert_equal(['FizzBuzz'], @fb.select { |res| res == 'FizzBuzz' })
     end
 
+    # Test the +reject+ method for basic simple rejections on FizzBuzz
     def test_reject
         assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], @fb.reject { |res| res.include?('Fizz') || res.include?('Buzz') })
     end
