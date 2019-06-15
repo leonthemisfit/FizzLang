@@ -61,4 +61,9 @@ class TestFizzBuzz < Test::Unit::TestCase
     def test_reject
         assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], @fb.reject { |res| res.include?('Fizz') || res.include?('Buzz') })
     end
+
+    # Test the join method on FizzBuzz
+    def test_join
+        assert_equal('1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz', @fb.join)
+    end
 end

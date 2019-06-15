@@ -84,6 +84,13 @@ module FizzLang
         res
     end
 
+    # Join the results into a single string with the +delim+
+    # * +delim+ -- A string to be used a delimeter between values,
+    # the dafault value is a single space
+    def join(delim = ' ')
+        as_array.join(delim)
+    end
+
     private
 
     def as_array
