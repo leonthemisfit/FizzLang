@@ -42,4 +42,14 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('15: FizzBuzz', with_map[14])
         assert_equal(nil, with_map[15])
     end
+
+    def test_select
+        assert_equal(['Fizz', 'Fizz', 'Fizz', 'Fizz'], @fb.select { |res| res == 'Fizz' })
+        assert_equal(['Buzz', 'Buzz'], @fb.select { |res| res == 'Buzz' })
+        assert_equal(['FizzBuzz'], @fb.select { |res| res == 'FizzBuzz' })
+    end
+
+    def test_reject
+        assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], @fb.reject { |res| res.include?('Fizz') || res.include?('Buzz') })
+    end
 end
