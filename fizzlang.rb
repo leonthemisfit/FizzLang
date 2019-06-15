@@ -159,7 +159,10 @@ module Fizzy
     attr_reader :tests
 
     # Prepare and define the methods and names that will be used to test
-    # values in a call to check().
+    # values in a call to check(). The method will also accept a block to which
+    # a hash will be passed to be populated with values. It should be noted that
+    # if arguments and a block are passed the arguments are ignored in favor of
+    # using the block.
     # * +args+ -- Variables list of arguments as symbols used to create the class methods
     #
     #       class FizzBuzz
@@ -170,23 +173,14 @@ module Fizzy
     #           Fizz 3
     #           Buzz 5
     #       end
-    def test_cases(*args)
+    def test_cases(*args, &block)
         @tests ||= nil
         
         return @tests unless @tests.nil?
-        
-        @tests = {}
-        args.each do |sym|
-            define_singleton_method(sym) do |n = 1|
-                @tests[sym] ||= n
-            end
 
-            define_method(sym) do
-                self.class.tests[sym]
-            end
-        end
-        
-        @tests
+        return process_block(&block) if block_given?
+
+        add_tests(*args)
     end
 
     # Test +n+ against the test cases stored on the Class
@@ -218,5 +212,38 @@ module Fizzy
     #       results = FizzLang.check_range(1..10)
     def check_range(rng)
         self.new(rng).results
+    end
+
+    private
+
+    def add_tests(*args)
+        @tests = {}
+        args.each do |sym|
+            define_singleton_method(sym) do |n = 1|
+                @tests[sym] ||= n
+            end
+
+            define_method(sym) do
+                self.class.tests[sym]
+            end
+        end
+        
+        @tests
+    end
+
+    def process_block(&block)
+        block_tests = {}
+        block.call(block_tests)
+        
+        syms = []
+        block_tests.each { |sym, val| syms << sym }
+
+        add_tests(*syms)
+
+        block_tests.each do |sym, val|
+            self.public_send(sym, val)
+        end
+
+        @tests
     end
 end
