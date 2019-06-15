@@ -207,4 +207,14 @@ module Fizzy
 
         res.empty? ? n.to_s : res
     end
+
+    # Class method added in order to quickly get an array of results instead
+    # of creating an instance and getting the results from that. This is just
+    # a wrapper aound the creation of a new class.
+    # * +rng+ -- A range of numbers such as +1..10+ to get results for
+    #
+    #       results = FizzLang.check_range(1..10)
+    def check_range(rng)
+        self.new(rng).results
+    end
 end

@@ -16,6 +16,7 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('FizzBuzz', FizzBuzz.check(15))
         assert_equal(3, FizzBuzz.Fizz)
         assert_equal(5, FizzBuzz.Buzz)
+        assert_equal(['1', '2', 'Fizz'], FizzBuzz.check_range(1..3))
     end
 
     # Test the basic instance usage and indexing on FizzBuzz
