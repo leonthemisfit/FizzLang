@@ -54,7 +54,7 @@ module FizzLang
         res = as_enum(:map)
 
         if block_given?
-            res = res.map { |str| block.call(str) }
+            res = res.map(&block)
         end
 
         res
