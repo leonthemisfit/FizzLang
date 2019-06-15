@@ -23,6 +23,10 @@ class TestFizzBuzz < Test::Unit::TestCase
         assert_equal('Buzz', @fb[4])
         assert_equal('FizzBuzz', @fb[14])
         assert_equal(nil, @fb[15])
+        assert_equal(
+            ['1', '2', 'Fizz', '4', 'Buzz', 
+            'Fizz', '7', '8', 'Fizz', 'Buzz', 
+            '11', 'Fizz', '13', '14', 'FizzBuzz'], @fb.results)
     end
 
     # Test the results of calling +map+ on FizzBuzz

@@ -27,6 +27,14 @@ module FizzLang
         as_array[ind]
     end
 
+    # Get the results from all the checks as an array
+    #
+    #       fizzy = FizzLang.new(1..10)
+    #       puts fizzy.results
+    def results
+        as_array
+    end
+
     # Perform an action for each item in the result. If a block is given this
     # will go through each result yielding each. If no block is passed an :each
     # enum will be returned.
