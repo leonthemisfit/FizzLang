@@ -162,8 +162,11 @@ module Fizzy
     # values in a call to check(). The method will also accept a block to which
     # a hash will be passed to be populated with values. It should be noted that
     # if arguments and a block are passed the arguments are ignored in favor of
-    # using the block.
-    # * +args+ -- Variables list of arguments as symbols used to create the class methods
+    # using the block. A third option to calling this method is to use keyword arguments.
+    # Only one method will be used to setup the class and the order of operations is
+    # block, keyword args, argument list.
+    # * +args+ -- Variable list of arguments as symbols used to create the class methods
+    # * +kwargs+ -- Set of keyword arguments used to create the class methods
     #
     #       class FizzBuzz
     #           include FizzLang
@@ -173,12 +176,12 @@ module Fizzy
     #           Fizz 3
     #           Buzz 5
     #       end
-    def test_cases(*args, &block)
+    def test_cases(*args, **kwargs, &block)
         @tests ||= nil
         
         return @tests unless @tests.nil?
-
         return process_block(&block) if block_given?
+        return process_kwargs(**kwargs) if kwargs.length > 0
 
         add_tests(*args)
     end
@@ -235,12 +238,16 @@ module Fizzy
         block_tests = {}
         block.call(block_tests)
         
+        process_kwargs(**block_tests)
+    end
+
+    def process_kwargs(**kwargs)
         syms = []
-        block_tests.each { |sym, val| syms << sym }
+        kwargs.each { |sym, val| syms << sym }
 
         add_tests(*syms)
 
-        block_tests.each do |sym, val|
+        kwargs.each do |sym, val|
             self.public_send(sym, val)
         end
 
