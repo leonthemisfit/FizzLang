@@ -1,3 +1,5 @@
+task :default => :build
+
 task :doc => :test do
     sh 'rdoc -x .sh -o htmldoc'
 end
