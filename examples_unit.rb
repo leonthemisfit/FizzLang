@@ -593,3 +593,46 @@ class TestBlockBarBaz < Test::Unit::TestCase
             @bbb.reduce { |acc, res| acc + res })
     end
 end
+
+# Test case for the BlockFizzBuzz class
+class TestBlockFizzBuzz < Test::Unit::TestCase
+
+    # Test the resetting and reassignment of a string
+    def test_manipulation
+        assert_equal('1', BlockFizzBuzz.check(1))
+        assert_equal('Fizz', BlockFizzBuzz.check(3))
+        assert_equal('Buzz', BlockFizzBuzz.check(5))
+        assert_equal('Fuzz', BlockFizzBuzz.check(6))
+        assert_equal('FizzBuzz', BlockFizzBuzz.check(15))
+        assert_equal('FuzzBuzz', BlockFizzBuzz.check(30))
+        assert_equal('Fizz', BlockFizzBuzz.fizz_string)
+
+        BlockFizzBuzz.fizz_string = 'Fozz'
+
+        assert_equal('Fozz', BlockFizzBuzz.check(3))
+        assert_equal('Fuzz', BlockFizzBuzz.check(6))
+        assert_equal('Fozz', BlockFizzBuzz.fizz_string)
+
+        BlockFizzBuzz.fizz_string :reset
+
+        assert_equal('fizz', BlockFizzBuzz.check(3))
+        assert_equal('fizz', BlockFizzBuzz.check(6))
+        assert_equal('fizz', BlockFizzBuzz.fizz_string)
+
+        BlockFizzBuzz.fizz_string = 'Fizz'
+
+        assert_equal('Fizz', BlockFizzBuzz.check(3))
+        assert_equal('Fizz', BlockFizzBuzz.check(6))
+        assert_equal('Fizz', BlockFizzBuzz.fizz_string)
+
+        BlockFizzBuzz.fizz_string { |val| 'Fuzz' if val.even? }
+        
+        assert_equal('1', BlockFizzBuzz.check(1))
+        assert_equal('Fizz', BlockFizzBuzz.check(3))
+        assert_equal('Buzz', BlockFizzBuzz.check(5))
+        assert_equal('Fuzz', BlockFizzBuzz.check(6))
+        assert_equal('FizzBuzz', BlockFizzBuzz.check(15))
+        assert_equal('FuzzBuzz', BlockFizzBuzz.check(30))
+        assert_equal('Fizz', BlockFizzBuzz.fizz_string)
+    end
+end
