@@ -1,26 +1,30 @@
 # Module to include to get the instance methods that can be used
 # for Fizz Buzz classes. Automatically extends Fizzy.
+# ========================================
 # For the examples in this documentation to function the FizzLang module must
 # be included in a class.
 module FizzLang
 
     # Automatically extend klass on inclusion with Fizzy
+    # ========================================
     # * +klass+ -- The Class being extended
     def self.included(klass)
         klass.extend(Fizzy)
     end
 
     # Default initializer used to get a range to use in list based methods
+    # ========================================
     # * +range+ -- A numeric range such as +1..10+
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     def initialize(range)
         @range = range
     end
 
     # Get the result at a given index in the provided range
+    # ========================================
     # * +ind+ -- the Integer index of the result to return
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       puts fizzy[0]
     def [](ind)
@@ -28,7 +32,7 @@ module FizzLang
     end
 
     # Get the results from all the checks as an array
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       puts fizzy.results
     def results
@@ -38,7 +42,7 @@ module FizzLang
     # Perform an action for each item in the result. If a block is given this
     # will go through each result yielding each. If no block is passed an :each
     # enum will be returned.
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..5)
     #       fizzy.each { |result| puts result }
     def each
@@ -55,7 +59,7 @@ module FizzLang
     # called with a block this will yield the value and result for each item. When
     # the block is omitted a map will be created with value and result pairs and
     # return as a :map enum
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..15)
     #       fizzy.with_val.map do |value, result|
     #           puts "#{value}: #{result}"
@@ -73,7 +77,7 @@ module FizzLang
     # Iterate over each result and perform a given action on it as in other map functions.
     # If called with a block the actual map will be performed otherwise a :map enum will
     # be returned.
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       fizzy.map { |result| result.upcase }
     def map(&block)
@@ -88,7 +92,7 @@ module FizzLang
 
     # Filter the results with a select statement. If a block is passed the select is called
     # with the block, otherwise returns a :select enum
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       fizzy.select { |result| result.include?('3') }
     def select(&block)
@@ -103,7 +107,7 @@ module FizzLang
 
     # Filter the results with a reject statement. If a block is passed the reject is called
     # with the block, otherwise returns a :reject enum
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       fizzy.reject { |result| result.include?('5') }
     def reject(&block)
@@ -117,8 +121,9 @@ module FizzLang
     end
 
     # Join the results into a single string with the +delim+
+    # ========================================
     # * +delim+ -- A string to be used a delimeter between values, the dafault value is a single space
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       spaces = fizzy.join
     #       underscores = fizzy.join('_')
@@ -129,8 +134,9 @@ module FizzLang
     # Reduce the results to a single value using a simply wrapper around
     # the Ruby reduce method. If a block is given it returns the result
     # of the reduction, with no block it returns an :reduce enum
+    # ========================================
     # * +start+ -- Starting value for the reduce, defaults to empty string
-    #
+    # ========================================
     #       fizzy = FizzLang.new(1..10)
     #       fizzy.reduce { |acc, res| acc + res }
     def reduce(start = '', &block)
@@ -166,9 +172,10 @@ module Fizzy
     # using the block. A third option to calling this method is to use keyword arguments.
     # Only one method will be used to setup the class and the order of operations is
     # block, keyword args, argument list.
+    # ========================================
     # * +args+ -- Variable list of arguments as symbols used to create the class methods
     # * +kwargs+ -- Set of keyword arguments used to create the class methods
-    #
+    # ========================================
     #       class FizzBuzz
     #           include FizzLang
     #           
@@ -177,7 +184,7 @@ module Fizzy
     #           Fizz 3
     #           Buzz 5
     #       end
-    #       
+    # ========================================
     #       class BlockBuzz
     #           include FizzLang
     #           
@@ -186,12 +193,21 @@ module Fizzy
     #               cases[:Buzz] = 5
     #           end
     #       end
-    #       
+    # ========================================
     #       class KeyBuzz
     #           include FizzLang
     #           
     #           test_cases Key: 3, Buzz: 5
     #       end
+    # ========================================
+    #       class AssignBuzz
+    #           include FizzLang
+    #           
+    #           test_cases :Assign, :Bang
+    #       end
+    #       
+    #       AssignBuzz.Assign = 3
+    #       AssignBuzz.Buzz(5)
     def test_cases(*args, **kwargs, &block)
         unless (args.length > 0) || (kwargs.length > 0) || (block_given?)
             return @tests || {}
@@ -204,8 +220,9 @@ module Fizzy
     end
 
     # Test +n+ against the test cases stored on the Class
+    # ========================================
     # * +n+ -- A Numeric representing the number to be tested
-    #
+    # ========================================
     #       class FizzBuzz
     #           include FizzLang
     #           
@@ -227,8 +244,9 @@ module Fizzy
     # Class method added in order to quickly get an array of results instead
     # of creating an instance and getting the results from that. This is just
     # a wrapper aound the creation of a new class.
+    # ========================================
     # * +rng+ -- A range of numbers such as +1..10+ to get results for
-    #
+    # ========================================
     #       results = FizzLang.check_range(1..10)
     def check_range(rng)
         self.new(rng).results
