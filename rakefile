@@ -1,7 +1,7 @@
 task :default => :build
 
 task :doc => :test do
-    sh 'rdoc -x .sh -o htmldoc'
+    sh 'rdoc -x .sh -x rakefile -o htmldoc'
 end
 
 task :test do
