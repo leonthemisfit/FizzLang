@@ -165,6 +165,9 @@ module Fizzy
     # Exposes the internal tests hash so that classes can use it internally
     attr_reader :tests
 
+    # Exposes the internal strings hash so that classes can use it internally
+    attr_reader :strings
+
     # Prepare and define the methods and names that will be used to test
     # values in a call to check(). The method will also accept a block to which
     # a hash will be passed to be populated with values. It should be noted that
@@ -295,6 +298,10 @@ module Fizzy
             define_method(sym) do
                 self.class.tests[sym]
             end
+
+            define_method("#{sym}_string") do
+                self.class.strings[sym] || sym.to_s
+            end 
         end
         
         @tests
