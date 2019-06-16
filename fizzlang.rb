@@ -234,8 +234,10 @@ module Fizzy
     #       
     #       FizzBuzz.check(15)
     def check(n)
-        res = @tests.reduce('') do |acc, (sym, val)|
-            (n % val).zero? ? acc + sym.to_s : acc
+        res = ''
+        
+        tests.each do |sym, val|
+            res += sym.to_s if (n % val).zero?
         end
 
         res.empty? ? n.to_s : res
