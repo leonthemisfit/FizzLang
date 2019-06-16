@@ -193,9 +193,10 @@ module Fizzy
     #           test_cases Key: 3, Buzz: 5
     #       end
     def test_cases(*args, **kwargs, &block)
-        @tests ||= nil
-        
-        return @tests unless @tests.nil?
+        unless (args.length > 0) || (kwargs.length > 0) || (block_given?)
+            return @tests || {}
+        end
+
         return process_block(&block) if block_given?
         return process_kwargs(**kwargs) if kwargs.length > 0
 
@@ -236,10 +237,21 @@ module Fizzy
     private
 
     def add_tests(*args)
-        @tests = {}
+        @tests ||= {}
+        
         args.each do |sym|
-            define_singleton_method(sym) do |n = 1|
-                @tests[sym] ||= n
+            next unless @tests[sym].nil?
+
+            define_singleton_method(sym) do |n = nil|
+                if n.nil?
+                    @tests[sym]
+                else
+                    self.public_send("#{sym}=", n)
+                end
+            end
+
+            define_singleton_method("#{sym}=") do |n|
+                @tests[sym] = n
             end
 
             define_method(sym) do
