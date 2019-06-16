@@ -211,6 +211,15 @@ module Fizzy
     #       
     #       AssignBuzz.Assign = 3
     #       AssignBuzz.Buzz(5)
+    # ========================================
+    #       class BarBaz
+    #           include FizzLang
+    #           
+    #           test_cases :bar, :baz
+    #           
+    #           bar 3, 'Bar'
+    #           baz 5, 'Baz'
+    #       end
     def test_cases(*args, **kwargs, &block)
         unless (args.length > 0) || (kwargs.length > 0) || (block_given?)
             return @tests || {}
