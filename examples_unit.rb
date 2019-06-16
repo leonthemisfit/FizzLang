@@ -419,45 +419,45 @@ class TestMethodBarBaz < Test::Unit::TestCase
     end
 end
 
-# Test Case for the ShorterBarBaz class
-class TestShorterBarBaz < Test::Unit::TestCase
+# Test Case for the KeywordBarBaz class
+class TestKeywordBarBaz < Test::Unit::TestCase
     # Prepare +fb+ instance variable for use in tests
     def setup
-        @sbb = ShorterBarBaz.new(1..15)
+        @kbb = KeywordBarBaz.new(1..15)
     end
 
-    # Test the class methods on ShorterBarBaz
+    # Test the class methods on KeywordBarBaz
     def test_static
-        assert_equal('1', ShorterBarBaz.check(1))
-        assert_equal('Bar', ShorterBarBaz.check(3))
-        assert_equal('Baz', ShorterBarBaz.check(5))
-        assert_equal('BarBaz', ShorterBarBaz.check(15))
-        assert_equal(3, ShorterBarBaz.bar)
-        assert_equal(5, ShorterBarBaz.baz)
-        assert_equal(['1', '2', 'Bar'], ShorterBarBaz.check_range(1..3))
+        assert_equal('1', KeywordBarBaz.check(1))
+        assert_equal('Bar', KeywordBarBaz.check(3))
+        assert_equal('Baz', KeywordBarBaz.check(5))
+        assert_equal('BarBaz', KeywordBarBaz.check(15))
+        assert_equal(3, KeywordBarBaz.bar)
+        assert_equal(5, KeywordBarBaz.baz)
+        assert_equal(['1', '2', 'Bar'], KeywordBarBaz.check_range(1..3))
 
-        assert_equal('Bar', ShorterBarBaz.bar_string)
-        assert_equal('Baz', ShorterBarBaz.baz_string)
+        assert_equal('Bar', KeywordBarBaz.bar_string)
+        assert_equal('Baz', KeywordBarBaz.baz_string)
     end
 
-    # Test the basic instance usage and indexing on ShorterBarBaz
+    # Test the basic instance usage and indexing on KeywordBarBaz
     def test_instance_basic
-        assert_equal('1', @sbb[0])
-        assert_equal('Bar', @sbb[2])
-        assert_equal('Baz', @sbb[4])
-        assert_equal('BarBaz', @sbb[14])
-        assert_equal(nil, @sbb[15])
+        assert_equal('1', @kbb[0])
+        assert_equal('Bar', @kbb[2])
+        assert_equal('Baz', @kbb[4])
+        assert_equal('BarBaz', @kbb[14])
+        assert_equal(nil, @kbb[15])
         assert_equal(
             ['1', '2', 'Bar', '4', 'Baz', 
             'Bar', '7', '8', 'Bar', 'Baz', 
-            '11', 'Bar', '13', '14', 'BarBaz'], @sbb.results)
-        assert_equal(3, @sbb.bar)
-        assert_equal(5, @sbb.baz)
+            '11', 'Bar', '13', '14', 'BarBaz'], @kbb.results)
+        assert_equal(3, @kbb.bar)
+        assert_equal(5, @kbb.baz)
     end
 
-    # Test the results of calling +map+ on ShorterBarBaz
+    # Test the results of calling +map+ on KeywordBarBaz
     def test_map
-        up = @sbb.map { |res| res.upcase }
+        up = @kbb.map { |res| res.upcase }
 
         assert_equal('1', up[0])
         assert_equal('BAR', up[2])
@@ -467,9 +467,9 @@ class TestShorterBarBaz < Test::Unit::TestCase
     end
 
     # Test the +with_val+ method by calling it and mapping the
-    # result for easier testing on ShorterBarBaz
+    # result for easier testing on KeywordBarBaz
     def test_with_val
-        with_map = @sbb.with_val.map do |val, res|
+        with_map = @kbb.with_val.map do |val, res|
             "#{val}: #{res}"
         end
 
@@ -480,27 +480,27 @@ class TestShorterBarBaz < Test::Unit::TestCase
         assert_equal(nil, with_map[15])
     end
 
-    # Test the +select+ method for basic simple selections on ShorterBarBaz
+    # Test the +select+ method for basic simple selections on KeywordBarBaz
     def test_select
-        assert_equal(['Bar', 'Bar', 'Bar', 'Bar'], @sbb.select { |res| res == 'Bar' })
-        assert_equal(['Baz', 'Baz'], @sbb.select { |res| res == 'Baz' })
-        assert_equal(['BarBaz'], @sbb.select { |res| res == 'BarBaz' })
+        assert_equal(['Bar', 'Bar', 'Bar', 'Bar'], @kbb.select { |res| res == 'Bar' })
+        assert_equal(['Baz', 'Baz'], @kbb.select { |res| res == 'Baz' })
+        assert_equal(['BarBaz'], @kbb.select { |res| res == 'BarBaz' })
     end
 
-    # Test the +reject+ method for basic simple rejections on ShorterBarBaz
+    # Test the +reject+ method for basic simple rejections on KeywordBarBaz
     def test_reject
         assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], 
-            @sbb.reject { |res| res.include?('Bar') || res.include?('Baz') })
+            @kbb.reject { |res| res.include?('Bar') || res.include?('Baz') })
     end
 
-    # Test the join method on ShorterBarBaz
+    # Test the join method on KeywordBarBaz
     def test_join
-        assert_equal('1 2 Bar 4 Baz Bar 7 8 Bar Baz 11 Bar 13 14 BarBaz', @sbb.join)
+        assert_equal('1 2 Bar 4 Baz Bar 7 8 Bar Baz 11 Bar 13 14 BarBaz', @kbb.join)
     end
 
-    # Test the reduce method on ShorterBarBaz
+    # Test the reduce method on KeywordBarBaz
     def test_reduce
         assert_equal('12Bar4BazBar78BarBaz11Bar1314BarBaz', 
-            @sbb.reduce { |acc, res| acc + res })
+            @kbb.reduce { |acc, res| acc + res })
     end
 end
