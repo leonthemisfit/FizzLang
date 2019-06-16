@@ -333,14 +333,14 @@ class TestAssignBuzz < Test::Unit::TestCase
     end
 end
 
-# Test Case for the BarBaz class
+# Test Case for the MethodBarBaz class
 class TestMethodBarBaz < Test::Unit::TestCase
     # Prepare +fb+ instance variable for use in tests
     def setup
         @mbb = MethodBarBaz.new(1..15)
     end
 
-    # Test the class methods on BarBaz
+    # Test the class methods on MethodBarBaz
     def test_static
         assert_equal('1', MethodBarBaz.check(1))
         assert_equal('Bar', MethodBarBaz.check(3))
@@ -354,7 +354,7 @@ class TestMethodBarBaz < Test::Unit::TestCase
         assert_equal('Baz', MethodBarBaz.baz_string)
     end
 
-    # Test the basic instance usage and indexing on BarBaz
+    # Test the basic instance usage and indexing on MethodBarBaz
     def test_instance_basic
         assert_equal('1', @mbb[0])
         assert_equal('Bar', @mbb[2])
@@ -369,7 +369,7 @@ class TestMethodBarBaz < Test::Unit::TestCase
         assert_equal(5, @mbb.baz)
     end
 
-    # Test the results of calling +map+ on BarBaz
+    # Test the results of calling +map+ on MethodBarBaz
     def test_map
         up = @mbb.map { |res| res.upcase }
 
@@ -381,7 +381,7 @@ class TestMethodBarBaz < Test::Unit::TestCase
     end
 
     # Test the +with_val+ method by calling it and mapping the
-    # result for easier testing on BarBaz
+    # result for easier testing on MethodBarBaz
     def test_with_val
         with_map = @mbb.with_val.map do |val, res|
             "#{val}: #{res}"
@@ -394,25 +394,25 @@ class TestMethodBarBaz < Test::Unit::TestCase
         assert_equal(nil, with_map[15])
     end
 
-    # Test the +select+ method for basic simple selections on BarBaz
+    # Test the +select+ method for basic simple selections on MethodBarBaz
     def test_select
         assert_equal(['Bar', 'Bar', 'Bar', 'Bar'], @mbb.select { |res| res == 'Bar' })
         assert_equal(['Baz', 'Baz'], @mbb.select { |res| res == 'Baz' })
         assert_equal(['BarBaz'], @mbb.select { |res| res == 'BarBaz' })
     end
 
-    # Test the +reject+ method for basic simple rejections on BarBaz
+    # Test the +reject+ method for basic simple rejections on MethodBarBaz
     def test_reject
         assert_equal(['1', '2', '4', '7', '8', '11', '13', '14'], 
             @mbb.reject { |res| res.include?('Bar') || res.include?('Baz') })
     end
 
-    # Test the join method on BarBaz
+    # Test the join method on MethodBarBaz
     def test_join
         assert_equal('1 2 Bar 4 Baz Bar 7 8 Bar Baz 11 Bar 13 14 BarBaz', @mbb.join)
     end
 
-    # Test the reduce method on BarBaz
+    # Test the reduce method on MethodBarBaz
     def test_reduce
         assert_equal('12Bar4BazBar78BarBaz11Bar1314BarBaz', 
             @mbb.reduce { |acc, res| acc + res })
