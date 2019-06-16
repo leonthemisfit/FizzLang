@@ -94,3 +94,14 @@ class MethodBarBaz
     bar_string 'Bar'
     baz_string 'Baz'
 end
+
+# Example class used to demonstrate using the shortened form of the original
+# class methods used to setup the class
+class ShorterBarBaz
+    include FizzLang
+
+    test_cases :bar, :baz
+
+    bar 3, 'Bar'
+    baz 5, 'Baz'
+end
