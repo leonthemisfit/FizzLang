@@ -539,6 +539,9 @@ class TestBlockBarBaz < Test::Unit::TestCase
             '11', 'Bar', '13', '14', 'BarBaz'], @bbb.results)
         assert_equal(3, @bbb.bar)
         assert_equal(5, @bbb.baz)
+
+        assert_equal('Bar', @bbb.bar_string)
+        assert_equal('Baz', @bbb.baz_string)
     end
 
     # Test the results of calling +map+ on BlockBarBaz
