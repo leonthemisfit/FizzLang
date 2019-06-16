@@ -203,7 +203,7 @@ module Fizzy
     #       class AssignBuzz
     #           include FizzLang
     #           
-    #           test_cases :Assign, :Bang
+    #           test_cases :Assign, :Buzz
     #       end
     #       
     #       AssignBuzz.Assign = 3
