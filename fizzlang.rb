@@ -250,7 +250,7 @@ module Fizzy
         
         tests.each do |sym, val|
             if (n % val).zero?
-                res += @strings[sym] || sym.to_s
+                res += get_string(sym, n)
             end
         end
 
@@ -273,6 +273,7 @@ module Fizzy
     def add_tests(*args)
         @tests ||= {}
         @strings ||= {}
+        @procs ||= {}
         
         args.each do |sym|
             next unless @tests[sym].nil?
@@ -290,11 +291,14 @@ module Fizzy
                 @tests[sym] = n
             end
 
-            define_singleton_method("#{sym}_string") do |str = ''|
-                if str.empty?
+            define_singleton_method("#{sym}_string") do |str = '', &block|
+                if block
+                    @procs[sym] = block
+                elsif str.empty?
                     @strings[sym]
-                elsif str.nil?
+                elsif str.nil? || str == :reset
                     self.public_send("#{sym}_string=", sym.to_s)
+                    @procs[sym] = nil
                 else
                     self.public_send("#{sym}_string=", str)
                 end
@@ -314,6 +318,24 @@ module Fizzy
         end
         
         @tests
+    end
+
+    def get_string(sym, val)
+        if has_proc?(sym)
+            @procs[sym].call(val) || @strings[sym] || sym.to_s
+        elsif has_string?(sym)
+            @strings[sym] || sym.to_s
+        else
+            sym.to_s
+        end
+    end
+
+    def has_proc?(sym)
+        !@procs[sym].nil?
+    end
+
+    def has_string?(sym)
+        !@strings[sym].nil?
     end
 
     def process_block(&block)
