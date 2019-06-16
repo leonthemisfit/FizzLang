@@ -1,0 +1,19 @@
+task :doc => :test do
+    sh 'rdoc -x .sh -o htmldoc'
+end
+
+task :test do
+    sh 'ruby examples_unit.rb'
+end
+
+task :debug do
+    sh 'irb -r ./examples'
+end
+
+task :interact => [:test, :debug]
+
+task :build => :doc
+
+task :commit => :build do
+    sh 'git commit'
+end
