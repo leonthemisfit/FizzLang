@@ -237,7 +237,9 @@ module Fizzy
         res = ''
         
         tests.each do |sym, val|
-            res += sym.to_s if (n % val).zero?
+            if (n % val).zero?
+                res += @strings[sym] || sym.to_s
+            end
         end
 
         res.empty? ? n.to_s : res
@@ -258,20 +260,36 @@ module Fizzy
 
     def add_tests(*args)
         @tests ||= {}
+        @strings ||= {}
         
         args.each do |sym|
             next unless @tests[sym].nil?
 
-            define_singleton_method(sym) do |n = nil|
+            define_singleton_method(sym) do |n = nil, str = ''|
                 if n.nil?
                     @tests[sym]
                 else
                     self.public_send("#{sym}=", n)
+                    self.public_send("#{sym}_string=", str) unless str.empty?
                 end
             end
 
             define_singleton_method("#{sym}=") do |n|
                 @tests[sym] = n
+            end
+
+            define_singleton_method("#{sym}_string") do |str = ''|
+                if str.empty?
+                    @strings[sym]
+                elsif str.nil?
+                    self.public_send("#{sym}_string=", sym.to_s)
+                else
+                    self.public_send("#{sym}_string=", str)
+                end
+            end
+
+            define_singleton_method("#{sym}_string=") do |str|
+                @strings[sym] = str
             end
 
             define_method(sym) do
@@ -295,8 +313,8 @@ module Fizzy
 
         add_tests(*syms)
 
-        kwargs.each do |sym, val|
-            self.public_send(sym, val)
+        kwargs.each do |sym, (val, str)|
+            self.public_send(sym, val, str || '')
         end
 
         @tests
