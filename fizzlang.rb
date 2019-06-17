@@ -9,7 +9,7 @@ module FizzLang
     # ========================================
     # * +klass+ -- The Class being extended
     def self.included(klass)
-        klass.extend(Fizzy)
+        klass.extend(FizzLangSingleton)
     end
 
     # Default initializer used to get a range to use in list based methods
@@ -161,7 +161,7 @@ end
 # Module that contains the main parts of the actual FizzLang DSL.
 # The methods here are used to dyanmically generate the appropriated
 # methods on the class being extended.
-module Fizzy
+module FizzLangSingleton
     # Exposes the internal tests hash so that classes can use it internally
     attr_reader :tests
 
