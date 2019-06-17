@@ -1,5 +1,6 @@
 require './examples/fizzbuzz'
 
+# Module containing all of the unit tests for the example classes
 module UnitTests
     # Test Case for the Examples::FizzBuzz class
     class TestFizzBuzz < Test::Unit::TestCase
