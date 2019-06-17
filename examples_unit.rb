@@ -596,7 +596,6 @@ end
 
 # Test case for the BlockFizzBuzz class
 class TestBlockFizzBuzz < Test::Unit::TestCase
-
     # Test the resetting and reassignment of a string
     def test_manipulation
         assert_equal('1', BlockFizzBuzz.check(1))
@@ -626,7 +625,7 @@ class TestBlockFizzBuzz < Test::Unit::TestCase
         assert_equal('Fizz', BlockFizzBuzz.fizz_string)
 
         BlockFizzBuzz.fizz_string { |val| 'Fuzz' if val.even? }
-        
+
         assert_equal('1', BlockFizzBuzz.check(1))
         assert_equal('Fizz', BlockFizzBuzz.check(3))
         assert_equal('Buzz', BlockFizzBuzz.check(5))
@@ -634,5 +633,69 @@ class TestBlockFizzBuzz < Test::Unit::TestCase
         assert_equal('FizzBuzz', BlockFizzBuzz.check(15))
         assert_equal('FuzzBuzz', BlockFizzBuzz.check(30))
         assert_equal('Fizz', BlockFizzBuzz.fizz_string)
+    end
+end
+
+# Test case for the FizzBuzzFooBarBazBang class
+class TestFizzBuzzFooBarBazBang < Test::Unit::TestCase
+    # Setup a shortened version of the class
+    def setup
+        @fb = FizzBuzzFooBarBazBang
+    end
+
+    # Test the static methods for case numbers on FizzBuzzFooBarBazBang class
+    def test_static_case
+        assert_equal('Fizz', @fb.check(3))
+        assert_equal('Buzz', @fb.check(5))
+        assert_equal('Foo', @fb.check(7))
+        assert_equal('FizzBar', @fb.check(9))
+        assert_equal('Baz', @fb.check(11))
+        assert_equal('Bang', @fb.check(13))
+    end
+
+    # Test the static methods for least common multiples
+    # of Fizz on FizzBuzzFooBarBazBang class
+    def test_static_fizz
+        assert_equal('FizzBuzz', @fb.check(15))
+        assert_equal('FizzFoo', @fb.check(21))
+        assert_equal('FizzBaz', @fb.check(33))
+        assert_equal('FizzBang', @fb.check(39))
+    end
+
+    # Test the static methods for least common multiples
+    # of Buzz on FizzBuzzFooBarBazBang class
+    def test_static_buzz
+        assert_equal('BuzzFoo', @fb.check(35))
+        assert_equal('FizzBuzzBar', @fb.check(45))
+        assert_equal('BuzzBaz', @fb.check(55))
+        assert_equal('BuzzBang', @fb.check(65))
+    end
+
+    # Test the static methods for least common multiples
+    # of Foo on FizzBuzzFooBarBazBang class
+    def test_static_foo
+        assert_equal('FizzFooBar', @fb.check(63))
+        assert_equal('FooBaz', @fb.check(77))
+        assert_equal('FooBang', @fb.check(91))
+    end
+
+    # Test the static methods for least common multiples
+    # of Bar on FizzBuzzFooBarBazBang class
+    def test_static_bar
+        assert_equal('FizzBarBaz', @fb.check(99))
+        assert_equal('FizzBarBang', @fb.check(117))
+    end
+
+    # Test the static methods for least common multiples
+    # of Baz on FizzBuzzFooBarBazBang class
+    def test_static_baz
+        assert_equal('BazBang', @fb.check(143))
+    end
+
+    # Test large numbers on the FizzBuzzFooBarBazBang class
+    def test_static_large
+        assert_equal('FizzBuzzFooBarBazBang', @fb.check(45045))
+        assert_equal('FizzBuzzFooBar', @fb.check(315))
+        assert_equal('FizzFooBarBazBang', @fb.check(9009))
     end
 end
