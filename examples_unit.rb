@@ -1,6 +1,17 @@
 require 'test/unit'
 require './examples'
 
+AssignBuzz = Examples::AssignBuzz
+BlockBarBaz = Examples::BlockBarBaz
+BlockBuzz = Examples::BlockBuzz
+BlockFizzBuzz = Examples::BlockFizzBuzz
+FizzBuzz = Examples::FizzBuzz
+FizzBuzzFooBarBazBang = Examples::FizzBuzzFooBarBazBang
+KeyBuzz = Examples::KeyBuzz
+KeywordBarBaz = Examples::KeywordBarBaz
+MethodBarBaz = Examples::MethodBarBaz
+StringyBuzz = Examples::StringyBuzz
+
 # Test Case for the FizzBuzz class
 class TestFizzBuzz < Test::Unit::TestCase
     # Prepare +fb+ instance variable for use in tests
