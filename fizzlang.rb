@@ -300,10 +300,10 @@ module Fizzy
                 if str.empty?
                     @strings[sym]
                 elsif str.nil? || str == :reset
-                    self.public_send("#{sym}_string=", sym.to_s)
+                    @strings[sym] = sym.to_s
                     @procs[sym] = nil
                 else
-                    self.public_send("#{sym}_string=", str)
+                    @strings[sym] = str
                 end
             end
 
