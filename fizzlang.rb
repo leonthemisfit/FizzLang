@@ -294,7 +294,10 @@ module Fizzy
             define_singleton_method("#{sym}_string") do |str = '', &block|
                 if block
                     @procs[sym] = block
-                elsif str.empty?
+                    str = @strings[sym] || sym.to_s if str.empty?
+                end
+
+                if str.empty?
                     @strings[sym]
                 elsif str.nil? || str == :reset
                     self.public_send("#{sym}_string=", sym.to_s)
