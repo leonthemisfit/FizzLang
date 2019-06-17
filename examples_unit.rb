@@ -699,3 +699,45 @@ class TestFizzBuzzFooBarBazBang < Test::Unit::TestCase
         assert_equal('FizzFooBarBazBang', @fb.check(9009))
     end
 end
+
+# Test case for the StringyBuzz class
+class TestStringyBuzz < Test::Unit::TestCase
+    # Test the resetting and reassignment of a string
+    def test_manipulation
+        assert_equal('1', StringyBuzz.check(1))
+        assert_equal('Fizz', StringyBuzz.check(3))
+        assert_equal('Buzz', StringyBuzz.check(5))
+        assert_equal('Fuzz', StringyBuzz.check(6))
+        assert_equal('FizzBuzz', StringyBuzz.check(15))
+        assert_equal('FuzzBuzz', StringyBuzz.check(30))
+        assert_equal('Fizz', StringyBuzz.fizz_string)
+
+        StringyBuzz.fizz_string = 'Fozz'
+
+        assert_equal('Fozz', StringyBuzz.check(3))
+        assert_equal('Fuzz', StringyBuzz.check(6))
+        assert_equal('Fozz', StringyBuzz.fizz_string)
+
+        StringyBuzz.fizz_string :reset
+
+        assert_equal('fizz', StringyBuzz.check(3))
+        assert_equal('fizz', StringyBuzz.check(6))
+        assert_equal('fizz', StringyBuzz.fizz_string)
+
+        StringyBuzz.fizz_string = 'Fizz'
+
+        assert_equal('Fizz', StringyBuzz.check(3))
+        assert_equal('Fizz', StringyBuzz.check(6))
+        assert_equal('Fizz', StringyBuzz.fizz_string)
+
+        StringyBuzz.fizz_string { |val| 'Fuzz' if val.even? }
+
+        assert_equal('1', StringyBuzz.check(1))
+        assert_equal('Fizz', StringyBuzz.check(3))
+        assert_equal('Buzz', StringyBuzz.check(5))
+        assert_equal('Fuzz', StringyBuzz.check(6))
+        assert_equal('FizzBuzz', StringyBuzz.check(15))
+        assert_equal('FuzzBuzz', StringyBuzz.check(30))
+        assert_equal('Fizz', StringyBuzz.fizz_string)
+    end
+end
