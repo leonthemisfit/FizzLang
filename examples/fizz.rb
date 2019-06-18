@@ -1,4 +1,4 @@
-require './fizzlang'
+require './lib/fizzlang'
 
 module Examples
     # A class used to demonstrate how class methods can be called

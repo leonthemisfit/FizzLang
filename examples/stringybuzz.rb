@@ -1,4 +1,4 @@
-require './fizzlang'
+require './lib/fizzlang'
 
 module Examples
     # Example class used to demonstrate setting both the string value

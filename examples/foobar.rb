@@ -1,4 +1,4 @@
-require './fizzlang'
+require './lib/fizzlang'
 
 module Examples
     # A variation of Fizz Buzz replacing fizz and buzz with

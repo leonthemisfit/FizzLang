@@ -1,4 +1,4 @@
-require './fizzlang'
+require './lib/fizzlang'
 
 module Examples
     # A class used to demonstrate the use of the assignment method of

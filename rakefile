@@ -14,7 +14,9 @@ end
 
 task :interact => [:test, :debug]
 
-task :build => :doc
+task :build => :doc do
+    sh 'gem build fizzlang.gemspec'
+end
 
 task :commit => :build do
     sh 'git commit'

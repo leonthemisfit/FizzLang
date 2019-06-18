@@ -1,4 +1,4 @@
-require './fizzlang'
+require './lib/fizzlang'
 
 # Module containing all of the example classes
 module Examples
