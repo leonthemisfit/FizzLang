@@ -1,23 +1,25 @@
-task :default => :build
+# frozen_string_literal: true
 
-task :doc => :test do
-    sh 'rdoc -x .sh -x rakefile -o htmldoc'
+task default: :build
+
+task doc: :test do
+  sh 'rdoc -x .sh -x rakefile -o htmldoc'
 end
 
 task :test do
-    sh 'ruby examples_unit.rb'
+  sh 'ruby examples_unit.rb'
 end
 
 task :debug do
-    sh 'irb -r ./examples'
+  sh 'irb -r ./examples'
 end
 
-task :interact => [:test, :debug]
+task interact: %i[test debug]
 
-task :build => :doc do
-    sh 'gem build fizzlang.gemspec'
+task build: :doc do
+  sh 'gem build fizzlang.gemspec'
 end
 
-task :commit => :build do
-    sh 'git commit'
+task commit: :build do
+  sh 'git commit'
 end
