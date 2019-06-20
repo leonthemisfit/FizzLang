@@ -4,3 +4,4 @@ ridoc/
 htmldoc/
 *.gem
 .yardoc
+.vscode
