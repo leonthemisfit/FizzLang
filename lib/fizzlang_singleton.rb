@@ -21,10 +21,10 @@ module FizzLangSingleton
   # using the block. A third option to calling this method is to use keyword
   # arguments. Only one method will be used to setup the class and the order
   # of operations is block, keyword args, argument list.
-  # ========================================
-  # * +args+ -- List of arguments as symbols used to create the class methods
-  # * +kwargs+ -- Set of keyword arguments used to create the class methods
-  # ========================================
+  #
+  # @param args List of arguments used to create the class methods
+  # @param kwargs Set of keyword arguments used to create the class methods
+  # @example Basic Example
   #     class FizzBuzz
   #       include FizzLang
   #
@@ -33,7 +33,8 @@ module FizzLangSingleton
   #       Fizz 3
   #       Buzz 5
   #     end
-  # ========================================
+  #
+  # @example Block Example
   #     class BlockBuzz
   #       include FizzLang
   #
@@ -42,13 +43,15 @@ module FizzLangSingleton
   #         cases[:Buzz] = 5
   #       end
   #     end
-  # ========================================
+  #
+  # @example Keyword Example
   #     class KeyBuzz
   #       include FizzLang
   #
   #       test_cases Key: 3, Buzz: 5
   #     end
-  # ========================================
+  #
+  # @example Assignment Example
   #     class AssignBuzz
   #       include FizzLang
   #
@@ -57,7 +60,8 @@ module FizzLangSingleton
   #
   #     AssignBuzz.Assign = 3
   #     AssignBuzz.Buzz(5)
-  # ========================================
+  #
+  # @example Short Method Example
   #     class BarBaz
   #       include FizzLang
   #
@@ -78,10 +82,10 @@ module FizzLangSingleton
     end
   end
 
-  # Test +n+ against the test cases stored on the Class
-  # ========================================
-  # * +n+ -- A Numeric representing the number to be tested
-  # ========================================
+  # Test +n_val+ against the test cases stored on the Class
+  #
+  # @param n_val [Numeric] the number to be tested
+  # @example
   #     class FizzBuzz
   #       include FizzLang
   #
@@ -105,9 +109,9 @@ module FizzLangSingleton
   # Class method added in order to quickly get an array of results instead
   # of creating an instance and getting the results from that. This is just
   # a wrapper aound the creation of a new class.
-  # ========================================
-  # * +rng+ -- A range of numbers such as +1..10+ to get results for
-  # ========================================
+  #
+  # @param rng [Range] numbers such as +1..10+ to get results for
+  # @example
   #     results = FizzLang.check_range(1..10)
   def check_range(rng)
     new(rng).results
