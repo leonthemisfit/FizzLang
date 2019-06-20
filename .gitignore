@@ -3,3 +3,4 @@ test*
 ridoc/
 htmldoc/
 *.gem
+.yardoc
