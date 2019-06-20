@@ -2,30 +2,31 @@
 
 # Module to include to get the instance methods that can be used
 # for Fizz Buzz classes. Automatically extends Fizzy.
-# ========================================
+#
 # For the examples in this documentation to function the FizzLang module must
 # be included in a class.
 module FizzLang
-  # Automatically extend klass on inclusion with Fizzy
-  # ========================================
-  # * +klass+ -- The Class being extended
+  # Automatically extend klass on inclusion with FizzBuzzSingleton
+  #
+  # @param klass [Class] The class being included
   def self.included(klass)
     klass.extend(FizzLangSingleton)
   end
 
   # Default initializer used to get a range to use in list based methods
-  # ========================================
-  # * +range+ -- A numeric range such as +1..10+
-  # ========================================
+  #
+  # @param range [Range] a numeric range such as +1..10+
+  # @example
   #     fizzy = FizzLang.new(1..10)
   def initialize(range)
     @range = range
   end
 
   # Get the result at a given index in the provided range
-  # ========================================
-  # * +ind+ -- the Integer index of the result to return
-  # ========================================
+  #
+  # @param ind [FixNum] the Integer index of the result to return
+  # @return [String] the result at the given index
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     puts fizzy[0]
   def [](ind)
@@ -33,7 +34,9 @@ module FizzLang
   end
 
   # Get the results from all the checks as an array
-  # ========================================
+  #
+  # @return [Array] array of results
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     puts fizzy.results
   def results
@@ -43,7 +46,8 @@ module FizzLang
   # Perform an action for each item in the result. If a block is given this
   # will go through each result yielding each. If no block is passed an :each
   # enum will be returned.
-  # ========================================
+  #
+  # @example
   #     fizzy = FizzLang.new(1..5)
   #     fizzy.each { |result| puts result }
   def each
@@ -60,7 +64,8 @@ module FizzLang
   # When called with a block this will yield the value and result for each item.
   # When the block is omitted a map will be created with value and result pairs
   # and return as a :map enum
-  # ========================================
+  #
+  # @example
   #     fizzy = FizzLang.new(1..15)
   #     fizzy.with_val.map do |value, result|
   #       puts "#{value}: #{result}"
@@ -78,7 +83,8 @@ module FizzLang
   # Iterate over each result and perform a given action on it as in other map
   # functions. If called with a block the actual map will be performed otherwise
   # a :map enum willbe returned.
-  # ========================================
+  #
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     fizzy.map { |result| result.upcase }
   def map(&block)
@@ -88,7 +94,8 @@ module FizzLang
 
   # Filter the results with a select statement. If a block is passed the select
   # is called with the block, otherwise returns a :select enum
-  # ========================================
+  #
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     fizzy.select { |result| result.include?('3') }
   def select(&block)
@@ -98,7 +105,8 @@ module FizzLang
 
   # Filter the results with a reject statement. If a block is passed the reject
   # is called with the block, otherwise returns a :reject enum
-  # ========================================
+  #
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     fizzy.reject { |result| result.include?('5') }
   def reject(&block)
@@ -107,9 +115,9 @@ module FizzLang
   end
 
   # Join the results into a single string with the +delim+
-  # ========================================
-  # * +delim+ -- A string to be used a delimeter between values.
-  # ========================================
+  #
+  # @param delim [String] a string to be used a delimeter between values.
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     spaces = fizzy.join
   #     underscores = fizzy.join('_')
@@ -120,9 +128,9 @@ module FizzLang
   # Reduce the results to a single value using a simply wrapper around
   # the Ruby reduce method. If a block is given it returns the result
   # of the reduction, with no block it returns an :reduce enum
-  # ========================================
-  # * +start+ -- Starting value for the reduce, defaults to empty string
-  # ========================================
+  #
+  # @param start [String] starting value for the reduce
+  # @example
   #     fizzy = FizzLang.new(1..10)
   #     fizzy.reduce { |acc, res| acc + res }
   def reduce(start = '', &block)
