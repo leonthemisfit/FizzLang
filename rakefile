@@ -3,7 +3,11 @@
 task default: :build
 
 task doc: :test do
-  sh 'rdoc -x .sh -x rakefile -o htmldoc'
+  sh 'yardoc ./examples/*.rb ./lib/*.rb ./unit_tests/*.rb -o htmldoc'
+end
+
+task docserv: :doc do
+  sh 'yard server'
 end
 
 task :test do
